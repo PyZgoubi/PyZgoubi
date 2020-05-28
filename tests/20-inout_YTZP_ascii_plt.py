@@ -40,13 +40,13 @@ res = run(xterm=False)
 if binary:
 	plt_data =  res.get_track('bplt', ['Y','T','Z','P'])
 else:
-	plt_data =  numpy.array(res.get_track('plt', ['Y','T','Z','P'])) / [100, 1000, 100, 1000]
-
+	plt_data =  numpy.array(res.get_track('plt', ['Y','T','Z','P','S'])) / [100, 1000, 100, 1000, 1]
 
 
 
 #select the points from entrance of the magnet
-plt_data = plt_data[::3]
+plt_data = plt_data[plt_data[:,4] == 0]
+plt_data = plt_data[:,0:4]
 
 #print
 #print b_orig_4d

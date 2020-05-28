@@ -1,6 +1,11 @@
+#!/usr/bin/env python2
 
 # makes zgoubi output files fai and plt in ascii and binary
 # note that for plt files, the ascii/binary choise must be made at compile time by modifying include/FILPLT.H
+
+binname = os.path.basename(zgoubi_settings['zgoubi_path'])
+outdir = "result_"+binname
+mkdir_p(outdir)
 
 for binary in [True, False]:
 	make_line('line')
@@ -34,21 +39,21 @@ for binary in [True, False]:
 	
 	if binary:
 		try:
-			res.save_b_fai("binary.fai")
+			res.save_b_fai(os.path.join(outdir,"binary.fai"))
 		except IOError:
 			print "could not save binary.fai"
 		try:
-			res.save_b_plt("binary.plt")
+			res.save_b_plt(os.path.join(outdir,"binary.plt"))
 		except IOError:
 			print "could not save binary.plt"
 	else:
-		res.save_fai("ascii.fai")
+		res.save_fai(os.path.join(outdir,"ascii.fai"))
 		try:
 			res.save_fai("ascii.fai")
 		except IOError:
 			print "could not save ascii.fai"
 		try:
-			res.save_plt("ascii.plt")
+			res.save_plt(os.path.join(outdir,"ascii.plt"))
 		except IOError:
 			print "could not save ascii.plt"
 

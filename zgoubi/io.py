@@ -161,7 +161,6 @@ def define_file(fname, allow_lookup=False):
 		#print "record_length", record_length
 		
 
-	
 	col_names = header[2].strip().strip('#').replace(" ", "").split(',')
 	col_types = header[3].strip().strip('#').replace(" ", "").split(',')
 	
@@ -171,7 +170,10 @@ def define_file(fname, allow_lookup=False):
 	dupes = list(set ([x  for x in col_names if (col_names.count(x) > 1)]))
 	if dupes:
 		raise ValueError, "Duplicate columns in:" + str(fname) + "\n" + " ".join(dupes)
-	
+
+	if len(col_names) != len(col_types):
+		raise ValueError, "Length of col_names (%s) not equal to length of col_types (%s)" % (len(col_names), len(col_types))
+
 	names = []
 	types = []
 	units = []
@@ -185,16 +187,16 @@ def define_file(fname, allow_lookup=False):
 		if rtype == "int":
 			ntype = "i4"
 			nbytes = 4
-		if rtype == "string":
+		elif rtype == "string":
 			if rname == "KLEY":
 				ntype = "a10"
 				nbytes = 10
 			if rname == "LABEL1":
-				ntype = "a8"
-				nbytes = 8
+				ntype = "a10"
+				nbytes = 10
 			if rname == "LABEL2":
-				ntype = "a8"
-				nbytes = 8
+				ntype = "a10"
+				nbytes = 10
 			if rname == "LET":
 				ntype = "a1"
 				nbytes = 1
@@ -205,16 +207,16 @@ def define_file(fname, allow_lookup=False):
 		names.append(nname)
 		types.append(ntype)
 		units.append(nunit)
-	
-	# Zgoubi SVN r290 switch labels from a8 to a10
-	if file_mode == 'binary' and byte_count != record_length:
-		types = ['a10' if t == 'a8' else t  for t in types]
 
-	# If it still does not fit, try a20, as of Zgoubi SVN r665
-	if file_mode == 'binary' and byte_count != record_length:
-		types = ['a20' if t == 'a8' else t  for t in types]
+	if file_mode == 'binary' and byte_count == record_length - 20:
+		# After Zgoubi 6, label length increased from 10 to 20
+		types[names.index("element_label1")] = "a20"
+		types[names.index("element_label2")] = "a20"
+		byte_count += 20
 
-	
+	if file_mode == 'binary' and byte_count != record_length:
+		raise ValueError, "byte_count from header types does not match record_length in file"
+
 	definition =  {'names':names, 'types':types, 'units':units, 'file_mode':file_mode, 'file_type':file_type, 'signature':signature}
 	if file_mode == 'binary':
 		definition['header_length'] = header_length

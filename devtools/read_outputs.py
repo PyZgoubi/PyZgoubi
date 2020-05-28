@@ -3,36 +3,17 @@
 
 from zgoubi import io
 
-io.store_def_all() ; exit()
+#io.store_def_all()
 
-af =  io.read_file("ascii.fai")
-#print af
-print af.shape
-print af[0]
-
-bf =  io.read_file("binary.fai")
-#print bf
-print bf.shape
-print bf[0]
-
-#for n, p in zip( af[0], bf[0]): print p
-
-
-
-print "plt"
-
-af =  io.read_file("ascii.plt")
-#print af
-print af.shape
-print af[0]
-
-bf =  io.read_file("binary.plt")
-#print bf
-print bf.shape
-print bf[0]
-
-#for p in zip( af[0], bf[0]): print p
-
+for fname in ["ascii.fai", "ascii.plt", "binary.fai", "binary.plt"]:
+	print "Reading", fname
+	try:
+		af = io.read_file(fname)
+		#print af
+		print af.shape
+		print af[0]
+	except IOError:
+		print "IOError reading", fname
 
 
 
