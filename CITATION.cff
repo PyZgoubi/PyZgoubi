@@ -3,11 +3,11 @@ cff-version: "1.1.0"
 message: If you use this software, please cite it as below.
 
 title: PyZgoubi
-version: '0.7'
-date-released: 2020-01-03
+version: '0.8'
+date-released: 2020-12-27
 license: GPL-2.0-or-later
-url: http://www.hep.manchester.ac.uk/u/samt/pyzgoubi/
-repository-code: https://sourceforge.net/projects/pyzgoubi/
+url: http://http://pyzgoubi.org/
+repository-code: https://github.com/PyZgoubi/PyZgoubi
 doi: 10.5281/zenodo.3597425
 
 authors:

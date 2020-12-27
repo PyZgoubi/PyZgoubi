@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-from __future__ import print_function
 from setuptools import setup 
 import sys
 import os
@@ -7,7 +6,10 @@ import shutil
 import errno
 from glob import glob
 
-MAIN_VERSION = '0.8.0a1'
+MAIN_VERSION = '0.8.0a2'
+
+with open("README", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
 
 if not ( "--help" in sys.argv):
 	if ("install" in sys.argv) or ("sdist" in sys.argv) or ("bdist_wheel" in sys.argv):
@@ -36,9 +38,7 @@ setup(name='pyzgoubi',
 	version=MAIN_VERSION,
 	packages=['zgoubi'],
 	scripts=['pyzgoubi'],
-	#package_data={'zgoubi': ['defs/*.py', 'defs/*.defs']},
 	data_files=[
-	            #('share/pyzgoubi/definitions',glob('defs/*')),
 	            ('share/pyzgoubi/examples',glob('examples/*')),
 	            ('share/pyzgoubi/test',glob('tests/*.py')),
 	          #  ('share/pyzgoubi/doc', glob('doc'))
@@ -48,16 +48,17 @@ setup(name='pyzgoubi',
 	url="http://sourceforge.net/projects/pyzgoubi/",
 	license="GNU GENERAL PUBLIC LICENSE",
 	description="PyZgoubi is an interface to the Zgoubi particle tracker written in python.",
+	long_description=long_description,
+	long_description_content_type="text/markdown",
 	classifiers=["Development Status :: 5 - Production/Stable",
 	             "Intended Audience :: Science/Research",
 				 "Topic :: Scientific/Engineering :: Physics",
 				 "License :: OSI Approved :: GNU General Public License (GPL)",
-				 "Programming Language :: Python :: 3.7"
-				 "Programming Language :: Python :: 3.8"
-				 "Programming Language :: Python :: 3.9"
+				 "Programming Language :: Python :: 3.7",
+				 "Programming Language :: Python :: 3.8",
+				 "Programming Language :: Python :: 3.9",
 				 ],
-	# install_requires tends to install new versions, even if not needed, so comment out
-	#install_requires=["numpy>=1.8.0", "scipy>=0.13.0", "matplotlib>=1.2.0"],
+	install_requires=["numpy>=1.8.0", "scipy>=0.13.0", "matplotlib>=1.2.0", "Zgoubi-metadata>=0.1"],
 	)
 
 

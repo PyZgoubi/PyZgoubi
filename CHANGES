@@ -1,12 +1,14 @@
 Changes from 0.7.1 -> 0.8.0
 ===========================
 
+Ported to Python 3
 Removed support for Zgoubi version before 6.0
 Remove obsolete and deprecated functions,
 * trans_to_regex, scanf, search_pattern, readArray, _bad_float
   in_bounds, check_bounds, get_extremes, list_particles
+Now requires Zgoubi-metadata package to provide element definitions
 
-Changes from 0.6.0 -> 0.7.1
+Changes from 0.7.0 -> 0.7.1
 ===========================
 Fri 2020-03-01
 

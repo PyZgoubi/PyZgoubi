@@ -204,14 +204,6 @@ def show_version():
 		print("python sys.path", str(sys.path))
 
 	import platform
-	if hasattr(platform, "linux_distribution"):
-		li = platform.linux_distribution()
-		if li[0]:
-			print(li[0], li[1], end=' ')
-	elif hasattr(platform, "dist"):
-		li = platform.dist()
-		if li[0]:
-			print(li[0], li[1], end=' ')
 	if hasattr(platform, "win32_ver"):
 		wi = platform.win32_ver()
 		if wi[0]:

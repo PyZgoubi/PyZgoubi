@@ -4,7 +4,7 @@ Python Zgoubi
 https://doi.org/10.5281/zenodo.3597425
 
 
-This is an interface to zgoubi. And framework for accelerator design. It is tested with zgoubi 6.0.1 from http://sourceforge.net/projects/zgoubi/ as well as recent developement versions, on Linux, MacOS X and Windows.
+This is an interface to zgoubi. And framework for accelerator design. It is tested with zgoubi 6.0.1 from http://sourceforge.net/projects/zgoubi/ as well as recent development versions, on Linux, MacOS X and Windows.
 
 Requirements:
 
